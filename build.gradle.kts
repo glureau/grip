@@ -22,10 +22,10 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
 }
 
-group = "com.glureau.grip"
-version = "0.2.0"
 
 allprojects {
+    group = "com.glureau.grip"
+    version = "0.2.0"
     repositories {
         mavenLocal()
         mavenCentral()

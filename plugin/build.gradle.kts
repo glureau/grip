@@ -1,3 +1,5 @@
+import java.net.URI
+
 plugins {
     kotlin("jvm")
     id("maven-publish")
@@ -9,8 +11,12 @@ dependencies {
     compileOnly(gradleApi())
 }
 
-group = "com.glureau.grip"
-version = rootProject.version
+pluginBundle {
+    website = "https://github.com/glureau/grip"
+    vcsUrl = "https://github.com/glureau/grip"
+    tags = listOf("replace", "grip", "swap", "markdown", "documentation")
+}
+
 gradlePlugin {
     plugins {
         create("grip") {
@@ -19,13 +25,11 @@ gradlePlugin {
             implementationClass = "com.glureau.grip.GripPlugin"
             displayName = "Replacement In-Place and file automation tools"
             description = "Update dynamically your files"
-        }
-        pluginBundle {
-            website = "https://github.com/glureau/grip"
-            vcsUrl = "https://github.com/glureau/grip"
+            implementationClass = "com.glureau.grip.GripPlugin"
         }
     }
 }
+
 /*
 publishing {
     repositories {
