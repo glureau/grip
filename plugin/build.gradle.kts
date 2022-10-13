@@ -30,7 +30,7 @@ gradlePlugin {
             id = "com.glureau.grip"
             implementationClass = "com.glureau.grip.GripPlugin"
             displayName = "Replacement In-Place and file automation tools"
-            description = "Update dynamically your files"
+            description = "Update dynamically your files! Add a directive in your documentation and automatically include your library version, or another gradle variable, or a system environment variable, or even a file."
             implementationClass = "com.glureau.grip.GripPlugin"
         }
     }
