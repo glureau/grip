@@ -1,6 +1,8 @@
 # GRIP (Gradle Replace In-Place)
 
-A quick tool to update some values in your files.
+A gradle tool to update some values in your (documentation) files by running a task.
+
+(inspired by [Knit](https://github.com/Kotlin/kotlinx-knit))
 
 ## Directives
 
