@@ -7,6 +7,12 @@ plugins {
     `java-gradle-plugin`
 }
 
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of("11"))
+    }
+}
+
 dependencies {
     compileOnly(gradleApi())
 }

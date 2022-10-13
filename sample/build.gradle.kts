@@ -4,7 +4,13 @@ plugins {
 }
 version= "1.2.3"
 kotlin {
-    jvm()
+    jvm {
+        val main by compilations.getting {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
     sourceSets {
         val jvmTest by getting {
             dependencies {
