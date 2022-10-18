@@ -56,7 +56,7 @@ grip {
 
     // Choose the files that grip should process
     files = fileTree(project.projectDir) {
-        // By default, we pick only markdowns on the src directory, but there is really no limitation
+        // By default, we pick only markdowns, but there is really no limitation on type file.
         include("**/**.md")
         // Avoid re-loading the generated files
         exclude("**/grip/**")
