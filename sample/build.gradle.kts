@@ -22,4 +22,8 @@ kotlin {
 
 grip {
     replaceInPlace = true
+    files = fileTree(projectDir) {
+        include("README.md")
+    }
 }
+tasks["grip"].dependsOn("jvmJar")

@@ -41,7 +41,7 @@ abstract class GripTask : DefaultTask() {
                 val fileContent = file.readText()
                 val allMatches = tokenStart.findAll(fileContent).toList()
 
-                if (allMatches.count() <= 1) return@forEach
+                if (allMatches.isEmpty()) return@forEach
 
                 var updatedContent = fileContent.substring(0, allMatches.first().range.first)
                 allMatches.forEachIndexed { index, startMatch ->

@@ -7,7 +7,7 @@ Kotlin used to build the plugin **_<!--$ GRADLE_PROPERTIES kotlinVersion -->1.7.
 
 Documentation update from computer with system env **_LOGNAME=<!--$ SYSTEM_ENV LOGNAME -->glureau<!-- END $-->_**
 
-Last documentation update: **_<!--$ DATETIME yyyy.MM.dd G 'at' HH:mm:ss z -->2022.10.12 AD at 20:39:01 CEST<!-- END $-->_**
+Last documentation update: **_<!--$ DATETIME yyyy.MM.dd G 'at' HH:mm:ss z -->2022.10.18 AD at 21:08:57 CEST<!-- END $-->_**
 
 Inclusion of another document : <!--$ INSERT src/commonMain/kotlin/com/glureau/grip/sample/doc.md -->
 
