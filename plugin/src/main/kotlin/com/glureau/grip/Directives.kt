@@ -1,6 +1,7 @@
 package com.glureau.grip
 
 import org.gradle.api.Project
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -10,10 +11,12 @@ fun directives(project: Project) = listOf<Directive>(
         val fileTree = project.fileTree(project.projectDir)
         fileTree.include(params[0])
 
-        fileTree.files.forEach {
-            println(" - file = $it")
-            filesContent += "\n" + it.readText()
-        }
+        fileTree.files
+            .sortedBy { it.path.substringBeforeLast(".") }
+            .forEach {
+                println(" - file = $it")
+                filesContent += "\n" + it.readText()
+            }
 
         filesContent
     },
