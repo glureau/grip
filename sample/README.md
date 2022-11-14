@@ -13,7 +13,7 @@ Documentation update from computer with system env **_LOGNAME=<!--$ SYSTEM_ENV L
 
 ---
 
-Last documentation update: **_<!--$ DATETIME yyyy.MM.dd G 'at' HH:mm:ss z -->2022.11.14 AD at 23:07:47 CET<!-- END $-->_**
+Last documentation update: **_<!--$ DATETIME yyyy.MM.dd G 'at' HH:mm:ss z -->2022.11.14 AD at 23:22:05 CET<!-- END $-->_**
 
 ---
 
@@ -31,20 +31,30 @@ Manifest-Version: 1.0
 
 ---
 Inclusion of multiple files
-<!--$ INSERT_DIRECTORIES src/commonMain/kotlin/com/glureau/grip/sample/p*/*.md "
-##### %LASTLASTDIR% / %LASTDIR% / %FILE%
+<!--$ INSERT_DIRECTORIES src/commonMain/kotlin/com/glureau/grip/sample/p*/*.md
+"
+## %LASTDIR%
+"
+"
+#### %FILE%
 "-->
 
-##### sample / paf / Foo
+## paf
+
+#### Foo
 foo
 
-##### sample / pif / Bar
+## pif
+
+#### Bar
 this is bar documentation
 
-##### sample / pouf / Baz
+## pouf
+
+#### Baz
 Baz is really awesome
 
-##### sample / pouf / Baz2
+#### Baz2
 Baz 2 is also **awesome**<!-- END $-->
 
 --

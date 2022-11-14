@@ -25,7 +25,7 @@ plugins {
 
 allprojects {
     group = "com.glureau.grip"
-    version = "0.4.1"
+    version = "0.4.2"
     repositories {
         mavenLocal()
         mavenCentral()

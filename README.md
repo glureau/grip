@@ -43,7 +43,7 @@ Take 1 parameter that represents the [formatting](https://docs.oracle.com/javase
 
 ```kotlin
 plugins {
-    id("com.glureau.grip") version "0.4.1"
+    id("com.glureau.grip") version "0.4.2"
 }
 ```
 
