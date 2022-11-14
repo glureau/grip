@@ -1,0 +1,1 @@
+Baz 2 is also **awesome**

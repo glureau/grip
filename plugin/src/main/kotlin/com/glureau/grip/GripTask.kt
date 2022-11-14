@@ -44,6 +44,7 @@ abstract class GripTask : DefaultTask() {
                 if (allMatches.isEmpty()) return@forEach
 
                 var updatedContent = fileContent.substring(0, allMatches.first().range.first)
+                val directives = directives(project)
                 allMatches.forEachIndexed { index, startMatch ->
                     val directiveWithParams = startMatch.groupValues[1]
                     val endMatch = tokenEnd.find(fileContent, startIndex = startMatch.range.last) ?: error("boom")
@@ -54,14 +55,15 @@ abstract class GripTask : DefaultTask() {
                         updatedContent += startMatch.groupValues[0]
                     val directiveKey = directiveWithParams.substringBefore(" ")
                     val params = directiveWithParams.substringAfter(" ").trim()
-                    directives(project).firstOrNull { it.key == directiveKey }.let { d ->
+                    directives.firstOrNull { it.key == directiveKey }.let { d ->
                         if (d == null) {
-                            println("Unknown directive $directiveKey ($directiveWithParams)")
+                            println("Unknown directive '$directiveKey' ($directiveWithParams)")
+                            println("  Available directives: " + directives.joinToString { it.key })
                             updatedContent += oldContent
                         } else {
                             println("Execute directive $directiveWithParams")
                             // Split by " " is a bit tricky, may be specific to the current Directive instead
-                            updatedContent += d.action(listOf(params))
+                            updatedContent += d.action(params)
                         }
                     }
 
