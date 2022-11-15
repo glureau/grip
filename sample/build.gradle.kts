@@ -1,6 +1,6 @@
 plugins {
     kotlin("multiplatform")
-    id("com.glureau.grip") version "0.4.3"
+    id("com.glureau.grip") version "0.4.4"
 }
 version= "1.2.3"
 kotlin {

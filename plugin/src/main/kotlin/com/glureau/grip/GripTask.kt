@@ -41,39 +41,10 @@ abstract class GripTask : DefaultTask() {
                 val fileContent = file.readText()
                 val allMatches = tokenStart.findAll(fileContent).toList()
 
-                if (allMatches.isEmpty()) return@forEach
-
-                var updatedContent = fileContent.substring(0, allMatches.first().range.first)
-                val directives = directives(project)
-                allMatches.forEachIndexed { index, startMatch ->
-                    val directiveWithParams = startMatch.groupValues[1]
-                    val endMatch = tokenEnd.find(fileContent, startIndex = startMatch.range.last) ?: error("boom")
-                    val endIndex = endMatch.range.first
-                    val oldContent = fileContent.substring(startMatch.range.last + 1, endIndex)
-
-                    if (ext.replaceInPlace)
-                        updatedContent += startMatch.groupValues[0]
-                    val directiveKey = directiveWithParams.substringBefore(" ")
-                    val params = directiveWithParams.substringAfter(" ").trim()
-                    directives.firstOrNull { it.key == directiveKey }.let { d ->
-                        if (d == null) {
-                            println("Unknown directive '$directiveKey' ($directiveWithParams)")
-                            println("  Available directives: " + directives.joinToString { it.key })
-                            updatedContent += oldContent
-                        } else {
-                            println("Execute directive $directiveWithParams")
-                            // Split by " " is a bit tricky, may be specific to the current Directive instead
-                            updatedContent += d.action(params)
-                        }
-                    }
-
-                    if (ext.replaceInPlace) {
-                        updatedContent += fileContent.substring(endMatch.range)
-                    }
-                    updatedContent += fileContent.substring(
-                        endMatch.range.last + 1,
-                        allMatches.getOrNull(index + 1)?.range?.start ?: fileContent.length
-                    )
+                val updatedContent = if (allMatches.isEmpty()) {
+                    fileContent
+                } else {
+                    updatedContent(fileContent, allMatches, tokenEnd, ext)
                 }
 
                 val toFile = if (ext.replaceInPlace) file else {
@@ -85,6 +56,47 @@ abstract class GripTask : DefaultTask() {
                 toFile.writeText(updatedContent)
                 println("Write on $toFile ! ${toFile.exists()}")
             }
+    }
+
+    private fun updatedContent(
+        fileContent: String,
+        allMatches: List<MatchResult>,
+        tokenEnd: Regex,
+        ext: GripExtension,
+    ): String {
+        var updatedContent = fileContent.substring(0, allMatches.first().range.first)
+        val directives = directives(project)
+        allMatches.forEachIndexed { index, startMatch ->
+            val directiveWithParams = startMatch.groupValues[1]
+            val endMatch = tokenEnd.find(fileContent, startIndex = startMatch.range.last) ?: error("boom")
+            val endIndex = endMatch.range.first
+            val oldContent = fileContent.substring(startMatch.range.last + 1, endIndex)
+
+            if (ext.replaceInPlace)
+                updatedContent += startMatch.groupValues[0]
+            val directiveKey = directiveWithParams.substringBefore(" ")
+            val params = directiveWithParams.substringAfter(" ").trim()
+            directives.firstOrNull { it.key == directiveKey }.let { d ->
+                if (d == null) {
+                    println("Unknown directive '$directiveKey' ($directiveWithParams)")
+                    println("  Available directives: " + directives.joinToString { it.key })
+                    updatedContent += oldContent
+                } else {
+                    println("Execute directive $directiveWithParams")
+                    // Split by " " is a bit tricky, may be specific to the current Directive instead
+                    updatedContent += d.action(params)
+                }
+            }
+
+            if (ext.replaceInPlace) {
+                updatedContent += fileContent.substring(endMatch.range)
+            }
+            updatedContent += fileContent.substring(
+                endMatch.range.last + 1,
+                allMatches.getOrNull(index + 1)?.range?.start ?: fileContent.length
+            )
+        }
+        return updatedContent
     }
 
     private fun getTokensFromFile(file: File): Pair<Regex, Regex> {
