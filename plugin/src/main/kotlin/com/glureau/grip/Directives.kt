@@ -1,6 +1,7 @@
 package com.glureau.grip
 
 import org.gradle.api.Project
+import org.gradle.configurationcache.extensions.capitalized
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,14 +42,14 @@ fun directives(project: Project) = listOf<Directive>(
                     filesContent += (params.getOrNull(1)?.value ?: "")
                         .trim()
                         .removeSurrounding("\"")
-                        .replace("%LASTDIR%", it.parentFile.name)
+                        .replace("%LASTDIR%", it.parentFile.name.capitalized())
                 }
                 if (!filePrinted.contains(it)) {
                     filePrinted += it
                     filesContent += (params.getOrNull(2)?.value ?: "")
                         .trim()
                         .removeSurrounding("\"")
-                        .replace("%FILE%", it.nameWithoutExtension)
+                        .replace("%FILE%", it.nameWithoutExtension.capitalized())
                 }
                 filesContent += it.readText()
             }

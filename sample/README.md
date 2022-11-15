@@ -13,7 +13,7 @@ Documentation update from computer with system env **_LOGNAME=<!--$ SYSTEM_ENV L
 
 ---
 
-Last documentation update: **_<!--$ DATETIME yyyy.MM.dd G 'at' HH:mm:ss z -->2022.11.14 AD at 23:22:05 CET<!-- END $-->_**
+Last documentation update: **_<!--$ DATETIME yyyy.MM.dd G 'at' HH:mm:ss z -->2022.11.14 AD at 23:26:05 CET<!-- END $-->_**
 
 ---
 
@@ -39,17 +39,17 @@ Inclusion of multiple files
 #### %FILE%
 "-->
 
-## paf
+## Paf
 
 #### Foo
 foo
 
-## pif
+## Pif
 
 #### Bar
 this is bar documentation
 
-## pouf
+## Pouf
 
 #### Baz
 Baz is really awesome
